@@ -6,6 +6,7 @@ import { db } from "../../lib/firebase";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import ActualizarComponente from "@/components/ActualizarComponente";
+import Image from "next/image";
 
 export default function PerfilPage() {
   const { user } = useAuth();
@@ -44,7 +45,7 @@ export default function PerfilPage() {
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-zinc-800 rounded-2xl shadow-xl space-y-4">
       <div className="flex items-center gap-4">
-        <img
+        <Image
           src={user.photoURL || "/user-placeholder.png"}
           alt="Foto de perfil"
           className="w-16 h-16 rounded-full"

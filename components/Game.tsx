@@ -16,13 +16,17 @@ import { Mision } from "@/types/Mision";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
+interface usuarioProps {
+  username: string;
+}
+
 const MAX_INTENTOS = 5;
 
 export default function Game() {
   const { palabra, longitud } = getPalabraDelDia();
   const { user } = useAuth();
 
-  const [usuarioData, setUsuarioData] = useState<any>(null);
+  const [usuarioData, setUsuarioData] = useState<usuarioProps | null>(null);
   const [intentos, setIntentos] = useState<string[]>([]);
   const [entradaActual, setEntradaActual] = useState("");
   const [juegoTerminado, setJuegoTerminado] = useState(false);
@@ -90,7 +94,7 @@ export default function Game() {
       if (acerto) {
         await guardarEnRanking({
           uid: user.uid,
-          username: usuarioData.username,
+          username: usuarioData?.username || "",
           fecha: getFechaHoy(),
           intentos: nuevosIntentos.length,
         });
@@ -113,7 +117,7 @@ export default function Game() {
       const ref = doc(db, "usuarios", user.uid);
       const snap = await getDoc(ref);
       if (snap.exists()) {
-        setUsuarioData(snap.data());
+        setUsuarioData(snap.data() as usuarioProps);
       }
     } catch (error) {
       console.error("Error al obtener datos del usuario:", error);
