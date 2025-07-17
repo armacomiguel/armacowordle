@@ -8,9 +8,18 @@ import Link from "next/link";
 import ActualizarComponente from "@/components/ActualizarComponente";
 import Image from "next/image";
 
+interface usuarioProps {
+  username: string;
+  nivel: number;
+   exp: number;
+  expSiguienteNivel: number;
+   monedas:number; 
+   racha: number;
+}
+
 export default function PerfilPage() {
   const { user } = useAuth();
-  const [usuarioData, setUsuarioData] = useState<any>(null);
+  const [usuarioData, setUsuarioData] = useState<usuarioProps | null>(null);
   const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
@@ -20,7 +29,7 @@ export default function PerfilPage() {
         const ref = doc(db, "usuarios", user.uid);
         const snap = await getDoc(ref);
         if (snap.exists()) {
-          setUsuarioData(snap.data());
+          setUsuarioData(snap.data() as usuarioProps);
         }
       } catch (error) {
         console.error("Error al obtener datos del usuario:", error);
