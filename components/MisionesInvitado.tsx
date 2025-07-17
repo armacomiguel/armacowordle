@@ -1,6 +1,15 @@
 "use client";
 
-export default function MisionesInvitado({mision1, mision2, mision3, p1, p2, p3}) {
+interface Props {
+  mision1: boolean;
+  mision2: boolean;
+  mision3: boolean;
+  p1: number;
+  p2: number;
+  p3: number;
+}
+
+export default function MisionesInvitado({mision1, mision2, mision3, p1, p2, p3}: Props) {
 
 const misiones = [
   {
