@@ -17,7 +17,6 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center min-h-[calc(100vh-80px)] p-4 gap-1 mt-10">
       
-      {/* Misiones: ocupa el 100% en móvil, 40% en desktop */}
       <div className="w-full lg:w-2/5">
         <MisionesInvitado 
           mision1={mision1}
