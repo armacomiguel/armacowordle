@@ -10,7 +10,17 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const MAX_INTENTOS = 2;
 
-export default function GameInvitado({setM1, setM2, setM3, setP1, setP2, setP3}) {
+interface Props {
+  setM1: (valor: boolean) => void;
+  setM2: (valor: boolean) => void;
+  setM3: (valor: boolean) => void;
+  // setP1: (valor: number) => void;
+  setP1: React.Dispatch<React.SetStateAction<number>>;
+  setP2: (valor: number) => void;
+  setP3: (valor: number) => void;
+}
+
+export default function GameInvitado({setM1, setM2, setM3, setP1, setP2, setP3}: Props) {
   // const { palabra, longitud } = getPalabraDelDia();
   const palabra = "MARIO";
   const longitud = 5;
@@ -21,8 +31,8 @@ export default function GameInvitado({setM1, setM2, setM3, setP1, setP2, setP3})
   const [juegoTerminado, setJuegoTerminado] = useState(false);
   const [animarError, setAnimarError] = useState(false);
   
-  const [mostrarResumen, setMostrarResumen] = useState(false);
-  const [acerto, setAcerto] = useState(false);
+  const mostrarResumen = false;
+  const acerto = false;
 
   const manejarEnter = async () => {
     
@@ -40,7 +50,6 @@ export default function GameInvitado({setM1, setM2, setM3, setP1, setP2, setP3})
     setIntentos(nuevosIntentos);
 
     const acerto = palabraIngresada === palabra;
-    console.log(acerto);
 
     if(entradaActual.length >= 20){
       setP1(20);

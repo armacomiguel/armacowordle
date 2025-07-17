@@ -6,6 +6,7 @@ import { auth, db } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
+import Image from "next/image";
 
 export default function Header() {
   const { user } = useAuth();
@@ -53,8 +54,9 @@ export default function Header() {
         className="flex items-center gap-4 cursor-pointer"
         onClick={irAlPerfil}
       >
-        <img
-          src={user.photoURL ?? ""}
+        
+        <Image
+          src={user?.photoURL ?? ""}
           alt="Foto de perfil"
           className="w-10 h-10 rounded-full border-2 border-blue-600"
         />

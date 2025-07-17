@@ -102,6 +102,7 @@ export default function Game() {
   };
 
   const cargarMisionesUsuario = async () => {
+    if (!user) return;
     const lista = await obtenerMisionesConProgreso(user.uid);
     setMisionesUsuario(lista);
   };

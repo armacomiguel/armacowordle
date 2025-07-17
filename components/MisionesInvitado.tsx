@@ -1,8 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-
 export default function MisionesInvitado({mision1, mision2, mision3, p1, p2, p3}) {
 
 const misiones = [
