@@ -95,6 +95,16 @@ export async function actualizarProgresoMisionUsuario(uid: string, misionId: str
   }
 }
 
+interface MisionUsuario {
+  nombre: string;
+  descripcion: string;
+  tipo: string;
+  requerido: number;
+  progreso: number;
+  completada: boolean;
+}
+
+
 export async function obtenerMisionesConProgreso(uid: string): Promise<Mision[]> {
   const misionesGlobalRef = collection(db, "misiones");
   const snapGlobal = await getDocs(misionesGlobalRef);
@@ -127,7 +137,7 @@ export async function obtenerMisionesConProgreso(uid: string): Promise<Mision[]>
       completada = dataUsuario.completada || false;
 
       // ⚠️ Revisar si faltan campos o están desactualizados
-      const updates: any = {};
+      const updates: Partial<MisionUsuario> = {};
 
       if (dataUsuario.nombre !== dataGlobal.nombre) updates.nombre = dataGlobal.nombre;
       if (dataUsuario.descripcion !== dataGlobal.descripcion) updates.descripcion = dataGlobal.descripcion;

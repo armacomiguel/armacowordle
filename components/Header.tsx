@@ -8,11 +8,16 @@ import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import Image from "next/image";
 
+interface usuarioProps {
+  username: string;
+}
+
 export default function Header() {
   const { user } = useAuth();
   const router = useRouter();
 
-  const [usuarioData, setUsuarioData] = useState<any>(null);
+  // aqui marca error el null
+  const [usuarioData, setUsuarioData] = useState<usuarioProps | null>(null);
 
   const handleLogout = async () => {
     try {
@@ -34,7 +39,8 @@ export default function Header() {
         const ref = doc(db, "usuarios", user.uid);
         const snap = await getDoc(ref);
         if (snap.exists()) {
-          setUsuarioData(snap.data());
+          // aqui marca error el span.data()
+          setUsuarioData(snap.data() as usuarioProps);
         }
       } catch (error) {
         console.error("Error al obtener datos del usuario:", error);
@@ -64,9 +70,6 @@ export default function Header() {
           <p className="text-sm font-semibold text-gray-800 dark:text-white">
             {usuarioData.username}
           </p>
-          {/* <p className="text-xs text-gray-500 dark:text-gray-400">
-            {user.email}
-          </p> */}
         </div>
       </div>
       <button

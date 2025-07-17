@@ -4,16 +4,27 @@ import { useEffect, useState } from "react";
 import { getFechaHoy } from "@/lib/utils/util";
 import { obtenerRankingDelDia } from "@/lib/firebase/ranking";
 
+interface RankingProps {
+  uid: string;
+  username: string;
+  fecha: string;
+  intentos: number;
+}
+
 export default function RankingDiario() {
-  const [ranking, setRanking] = useState<any[]>([]);
+  const [ranking, setRanking] = useState<RankingProps[]>([]);
   const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
     const fetchRanking = async () => {
       const data = await obtenerRankingDelDia(getFechaHoy());
-      setRanking(data);
+
+      // Validar los datos que vienen del backend
+      const parsed: RankingProps[] = data.map((doc) => doc as RankingProps);
+      setRanking(parsed);
       setCargando(false);
     };
+
     fetchRanking();
   }, []);
 
