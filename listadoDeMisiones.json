@@ -1,0 +1,93 @@
+{
+  id: "escribe_10_letras",
+  nombre: "Escribe 10 letras",
+  descripcion: "Escribe al menos 10 letras hoy.",
+  tipo: "diaria",
+  requerido: 10,
+  progreso: 0,
+  completada: false
+},
+{
+  id: "adivina_1_palabra",
+  nombre: "Adivina una palabra",
+  descripcion: "Adivina correctamente la palabra del día.",
+  tipo: "diaria",
+  requerido: 1,
+  progreso: 0,
+  completada: false
+},
+{
+  id: "intenta_una_palabra",
+  nombre: "Intenta una palabra",
+  descripcion: "Haz al menos un intento de palabra hoy.",
+  tipo: "diaria",
+  requerido: 1,
+  progreso: 0,
+  completada: false
+},
+{
+  id: "juega_una_partida",
+  nombre: "Juega una partida",
+  descripcion: "Juega una partida completa (aunque no aciertes).",
+  tipo: "diaria",
+  requerido: 1,
+  progreso: 0,
+  completada: false
+},
+{
+  id: "intenta_6_veces",
+  nombre: "Intenta 6 veces",
+  descripcion: "Haz los 6 intentos permitidos en una partida.",
+  tipo: "diaria",
+  requerido: 6,
+  progreso: 0,
+  completada: false
+}
+
+
+// LARGAS
+{
+  id: "escribe_100_letras",
+  nombre: "Escribe 100 letras",
+  descripcion: "Escribe un total de 100 letras.",
+  tipo: "larga",
+  requerido: 100,
+  progreso: 0,
+  completada: false
+},
+{
+  id: "adivina_10_palabras",
+  nombre: "Adivina 10 palabras",
+  descripcion: "Adivina correctamente 10 palabras diferentes.",
+  tipo: "larga",
+  requerido: 10,
+  progreso: 0,
+  completada: false
+},
+{
+  id: "juega_20_partidas",
+  nombre: "Juega 20 partidas",
+  descripcion: "Juega 20 partidas en total.",
+  tipo: "larga",
+  requerido: 20,
+  progreso: 0,
+  completada: false
+},
+{
+  id: "falla_5_veces",
+  nombre: "Falla 5 veces",
+  descripcion: "Juega y no aciertes en 5 partidas.",
+  tipo: "larga",
+  requerido: 5,
+  progreso: 0,
+  completada: false
+},
+{
+  id: "intenta_50_veces",
+  nombre: "Haz 50 intentos",
+  descripcion: "Escribe 50 intentos de palabras, aunque no aciertes.",
+  tipo: "larga",
+  requerido: 50,
+  progreso: 0,
+  completada: false
+}
