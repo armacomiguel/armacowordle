@@ -3,7 +3,7 @@ type Props = {
   onKeyPress: (key: string) => void;
 };
 
-export default function Keyboard({ onKeyPress }: Props) {
+export default function KeyboardInvitado({ onKeyPress }: Props) {
   const filas = [
     "QWERTYU".split(""),
     "IOPASDF".split(""),
@@ -28,7 +28,7 @@ export default function Keyboard({ onKeyPress }: Props) {
                   ${
                     isEnter
                       ? "bg-yellow-400 text-black px-12"
-                      : "bg-gray-300 dark:bg-gray-700"
+                      : "bg-gray-300"
                   }`}
               >
                 {tecla}

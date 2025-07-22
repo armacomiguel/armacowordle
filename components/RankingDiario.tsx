@@ -29,8 +29,8 @@ export default function RankingDiario() {
   }, []);
 
   return (
-    <div className="max-w-md mx-auto p-4 bg-white shadow-md rounded-xl">
-      <h2 className="text-2xl font-bold mb-4 text-center">🏆 Ranking del día</h2>
+    <div className="max-w-md mx-auto p-4 bg-white dark:bg-[#1d1d1d] border border-[#e5e5e5] dark:border-[#ffff00] rounded-xl">
+      <h2 className="text-2xl font-bold mb-4 text-center text-black dark:text-white">🏆 Ranking del día</h2>
 
       {cargando ? (
         <p className="text-center text-gray-500">Cargando...</p>
@@ -43,12 +43,12 @@ export default function RankingDiario() {
           {ranking.map((item, i) => (
             <div
               key={item.uid}
-              className="flex justify-between border-b border-gray-200 py-2"
+              className="flex justify-between border-b dark:border-[#5e5e04] py-2"
             >
-              <span className="font-medium">
+              <span className="font-medium text-[12px]">
                 {i + 1}. {item.username}
               </span>
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-gray-600 dark:text-white text-[12px]">
                 {item.intentos} intento{item.intentos > 1 ? "s" : ""}
               </span>
             </div>

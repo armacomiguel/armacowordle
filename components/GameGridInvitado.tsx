@@ -78,7 +78,7 @@ export default function GameGridInvitado({
               const letra = intento[col] ?? "";
               const estado = estados[col];
 
-              let colorClass = "bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 text-black";
+              let colorClass = "bg-white  border-2 border-gray-300 text-black";
 
               if (!esFilaActiva) {
                 if (estado === "correcto") colorClass = "bg-green-500 text-white border-green-500";
@@ -87,7 +87,7 @@ export default function GameGridInvitado({
               } else {
                 const siguientePos = entradaActual.length;
                 if (col === siguientePos) {
-                  colorClass += " border-blue-500 shadow-md shadow-blue-300 dark:shadow-blue-500";
+                  colorClass += " border-blue-500 shadow-md shadow-blue-300";
                 }
               }
 

@@ -1,12 +1,20 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class',
+  darkMode: ["class"],
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
+      colors: {
+        dark: {
+          primary: "#0a0a0a",
+        }
+      },
+      fontFamily: {
+      sans: ['var(--font-lato)'],
+    },
       keyframes: {
         shake: {
           '0%, 100%': { transform: 'translateX(0)' },

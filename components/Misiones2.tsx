@@ -51,7 +51,7 @@ export default function Misiones() {
   if (loading) return <p className="text-center">Cargando misiones...</p>;
 
   return (
-    <div className="w-full max-w-md mx-auto p-4 bg-white dark:bg-gray-900 rounded-xl shadow">
+    <div className="w-full max-w-md mx-auto p-4 bg-white dark:bg-[#292a2b] rounded-xl shadow">
       <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">Misiones</h2>
       <div className="space-y-4">
         {misiones.map((mision) => {
@@ -61,7 +61,7 @@ export default function Misiones() {
           );
 
           return (
-            <div key={mision.id} className="p-3 rounded-lg border dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+            <div key={mision.id} className="p-3 rounded-lg border dark:border-gray-700 bg-gray-50 dark:bg-[#27272a]">
               <div className="flex justify-between items-center mb-1">
                 <h3 className="text-sm font-medium text-gray-900 dark:text-white">
                   {mision.nombre}

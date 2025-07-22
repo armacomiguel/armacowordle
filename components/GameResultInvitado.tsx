@@ -31,9 +31,9 @@ export default function GameResult({ ganaste, intentos, palabraSecreta }: Props)
         {ganaste
           ? `Adivinaste la palabra en ${intentos} intento${intentos === 1 ? "." : "s."}`
           : `La palabra era: `}
-        <span className="font-bold text-blue-600 dark:text-blue-400">{!ganaste && palabraSecreta}</span>
+        <span className="font-bold text-blue-600">{!ganaste && palabraSecreta}</span>
       </p>
-      <p>Crea una cuenta para tener acceso completo al <span>RANKING</span>, <span>MISIONES</span> y <span>PERFIL</span>.</p>
+      <p>Crea una cuenta para tener acceso completo al <span>RANKING</span>, <span>MISIONES</span>, <span>PERFIL</span> y <span>MODO OSCURO</span>.</p>
       <Link href="/login">
         <button className="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Iniciar sesión</button>
       </Link>

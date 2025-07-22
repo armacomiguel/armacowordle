@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {Lato } from "next/font/google";
 import { AuthProvider } from "@/context/AuthContext";
 import "./globals.css";
+import ThemeProvider from "@/context/Theme";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const lato = Lato({
+  variable: "--font-lato",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "700", "900"], // puedes agregar los que necesites
 });
 
 export const metadata: Metadata = {
@@ -24,14 +21,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${lato.variable} antialiased bg-white text-black dark:bg-[#131416] dark:text-white`}
       >
-         <AuthProvider>
-          {children}
+        <AuthProvider>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+            {children}
+          </ThemeProvider>
         </AuthProvider>
       </body>
     </html>
   );
 }
+

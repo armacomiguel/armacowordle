@@ -53,7 +53,7 @@ const misiones = [
           );
 
           return (
-            <div key={index} className="p-2 rounded-lg border dark:border-gray-700 bg-gray-50 dark:bg-gray-800" >
+            <div key={index} className="p-2 rounded-lg border bg-gray-50" >
               <div className="flex justify-between mb-1">
                 <h3 className="font-medium">{mision.nombre}</h3>
                 {mision.completada ? (
@@ -67,7 +67,7 @@ const misiones = [
               <p className="text-sm text-gray-500 mb-2">
                 {mision.descripcion}
               </p>
-              <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded">
+              <div className="w-full h-2 bg-gray-200 rounded">
                 <div
                   className="h-full bg-blue-600 rounded"
                   style={{ width: `${porcentaje}%` }}

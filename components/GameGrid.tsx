@@ -78,7 +78,7 @@ export default function GameGrid({
               const letra = intento[col] ?? "";
               const estado = estados[col];
 
-              let colorClass = "bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 text-black";
+              let colorClass = "bg-white dark:bg-[#27272a] border-1 border-gray-300 dark:border-[#6e6e6e] text-black dark:text-white";
 
               if (!esFilaActiva) {
                 if (estado === "correcto") colorClass = "bg-green-500 text-white border-green-500";
@@ -110,7 +110,7 @@ export default function GameGrid({
         );
       })}
       <div className="text-center">
-        <p className="text-sm text-gray-500 mb-2">
+        <p className="font-sans font-medium text-sm text-black mb-2 dark:text-[#ffff00]">
           Las palabras estan en español
         </p>
       </div>

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 // import { getPalabraDelDia } from "@/lib/utils/util";
 import GameGridInvitado from "./GameGridInvitado";
-import Keyboard from "./Keyboard";
+import KeyboardInvitado from "./KeyboardInvitado";
 import GameResultInvitado from "./GameResultInvitado";
 import GameResumen from "./GameResumen";
 import { AnimatePresence, motion } from "framer-motion";
@@ -141,7 +141,7 @@ export default function GameInvitado({setM1, setM2, setM3, setP1, setP2, setP3}:
             filaActiva={intentos.length}
             animarError={animarError}
           />
-        <Keyboard
+        <KeyboardInvitado
           intentoActual={entradaActual}
           onKeyPress={(letra) => {
             if (juegoTerminado) return;

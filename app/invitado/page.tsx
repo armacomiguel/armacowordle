@@ -3,6 +3,7 @@
 import MisionesInvitado from "@/components/MisionesInvitado";
 import GameInvitado from "@/components/GameInvitado";
 import { useState } from "react";
+import HeaderInvitado from "@/components/HeaderInvitado";
 
 export default function Home() {
 
@@ -15,7 +16,8 @@ export default function Home() {
   const [progreso3, setProgreso3] = useState(0);
 
   return (
-    <main className="flex flex-col items-center min-h-[calc(100vh-80px)] p-4 gap-1 mt-10">
+    <main className="flex flex-col items-center min-h-[calc(100vh-80px)] p-4 gap-1">
+      {/* <HeaderInvitado /> */}
       
       <div className="w-full lg:w-2/5">
         <MisionesInvitado 

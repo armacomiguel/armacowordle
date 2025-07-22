@@ -99,8 +99,7 @@ export default function Misiones() {
           return (
             <div
               key={mision.id}
-              className="p-3 rounded-lg border dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
-            >
+              className="p-3 rounded-lg border bg-gray-50 dark:bg-[#27272a]">
               <div className="flex justify-between mb-1">
                 <h3 className="font-medium">{mision.nombre}</h3>
                 {mision.completada ? (
@@ -116,7 +115,7 @@ export default function Misiones() {
               </p>
               <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded">
                 <div
-                  className="h-full bg-blue-600 rounded"
+                  className="h-full bg-[#12acff] rounded"
                   style={{ width: `${porcentaje}%` }}
                 />
               </div>
