@@ -49,3 +49,31 @@ export async function actualizarStatsUsuario(uid: string, acerto: boolean) {
     racha: nuevaRacha,
   });
 }
+
+export async function actualizarExpYNivel(uid: string, expGanada: number) {
+  const ref = doc(db, "usuarios", uid);
+  const snap = await getDoc(ref);
+
+  if (!snap.exists()) return;
+
+  const datos = snap.data();
+  let nuevaExp = datos.exp + expGanada;
+  let nuevoNivel = datos.nivel;
+  let nuevaExpSiguiente = datos.expSiguienteNivel;
+  let nuevaMoneda = datos.monedas;
+
+  // Subir de nivel si alcanza la exp requerida
+  while (nuevaExp >= nuevaExpSiguiente) {
+    nuevaExp -= nuevaExpSiguiente;
+    nuevoNivel += 1;
+    nuevaExpSiguiente = Math.floor(nuevaExpSiguiente * 1.25);
+    nuevaMoneda+=5;
+  }
+
+  await updateDoc(ref, {
+    exp: nuevaExp,
+    nivel: nuevoNivel,
+    expSiguienteNivel: nuevaExpSiguiente,
+    monedas: nuevaMoneda,
+  });
+}

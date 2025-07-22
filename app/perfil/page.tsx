@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import ActualizarComponente from "@/components/ActualizarComponente";
 import Image from "next/image";
+import Header from "@/components/Header";
 
 interface usuarioProps {
   username: string;
@@ -52,44 +53,48 @@ export default function PerfilPage() {
   const { nivel, exp, expSiguienteNivel, monedas, racha } = usuarioData;
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-zinc-800 rounded-2xl shadow-xl space-y-4">
-      <div className="flex items-center gap-4">
-        <Image
-          src={user.photoURL || "/user-placeholder.png"}
-          alt="Foto de perfil"
-          className="w-16 h-16 rounded-full"
-        />
-        <div>
-          <h2 className="text-xl font-bold">{usuarioData.username}</h2>
-          {/* <p className="text-sm text-gray-500">{user.email}</p> */}
-        </div>
-      </div>
-
-      <div className="space-y-2">
-        <div>
-          <p className="font-medium">Nivel: {nivel}</p>
-          <div className="w-full h-4 bg-gray-200 dark:bg-zinc-700 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-green-500 transition-all"
-              style={{
-                width: `${(exp / expSiguienteNivel) * 100}%`,
-              }}
-            />
+    <>
+      <Header />
+      <div className="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-zinc-800 rounded-2xl shadow-xl space-y-4">
+        <div className="flex items-center gap-4">
+          <Image
+            src={user.photoURL || "/user-placeholder.png"}
+            alt="Foto de perfil"
+            className="w-16 h-16 rounded-full"
+            width={60} height={60}
+          />
+          <div>
+            <h2 className="text-xl font-bold">{usuarioData.username}</h2>
+            {/* <p className="text-sm text-gray-500">{user.email}</p> */}
           </div>
-          <p className="text-sm text-gray-500 mt-1">
-            {exp} / {expSiguienteNivel} XP
-          </p>
         </div>
 
-        <p className="font-medium">💰 Monedas: {monedas}</p>
-        <p className="font-medium">🔥 Racha: {racha} días</p>
+        <div className="space-y-2">
+          <div>
+            <p className="font-medium">Nivel: {nivel}</p>
+            <div className="w-full h-4 bg-gray-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-green-500 transition-all"
+                style={{
+                  width: `${(exp / expSiguienteNivel) * 100}%`,
+                }}
+              />
+            </div>
+            <p className="text-sm text-gray-500 mt-1">
+              {exp} / {expSiguienteNivel} XP
+            </p>
+          </div>
+
+          <p className="font-medium">💰 Monedas: {monedas}</p>
+          <p className="font-medium">🔥 Racha: {racha} días</p>
+        </div>
+
+        <ActualizarComponente />
+
+        <Link href="/">
+          <button className="w-full mt-4 bg-[#f1a10d] text-white px-4 py-2 rounded-lg">Ir al Home</button>
+        </Link>
       </div>
-
-      <ActualizarComponente />
-
-      <Link href="/">
-        <button className="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Ir al Home</button>
-      </Link>
-    </div>
+    </>
   );
 }

@@ -75,7 +75,11 @@ export default function Header() {
             {usuarioData.username}
           </p>
         </div>
+        <div>
+          <span className="text-[12px] text-gray-400">juego en fase beta</span>
+        </div>
       </div>
+      
 
       <div className="flex items-center gap-4">
         {/* 🌙 Botón Toggle Dark/Light */}

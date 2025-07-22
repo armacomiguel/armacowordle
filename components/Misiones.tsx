@@ -10,6 +10,7 @@ import {
   getDoc,
   setDoc,
 } from "firebase/firestore";
+import { actualizarExpYNivel } from "@/lib/firebase/usuario";
 
 interface MisionGlobal {
   id: string;
@@ -30,6 +31,11 @@ export default function Misiones() {
     (MisionGlobal & MisionUsuario)[]
   >([]);
   const [loading, setLoading] = useState(true);
+
+  const completarMision = async () => {
+    // console.log(user);
+    await actualizarExpYNivel(user?.uid, 10);
+  }
 
   useEffect(() => {
     const cargarMisiones = async () => {
@@ -119,6 +125,12 @@ export default function Misiones() {
                   style={{ width: `${porcentaje}%` }}
                 />
               </div>
+              {mision.completada && (
+                <div className="">
+                  <button onClick={() => completarMision()} 
+                  className="w-full mt-2 bg-blue-400 text-white dark:bg-green-500 rounded-[8px] text-center p-1 font-bold dark:text-green-800">Obtener</button>
+                </div>
+              )}
             </div>
           );
         })}
