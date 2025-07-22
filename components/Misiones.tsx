@@ -33,9 +33,10 @@ export default function Misiones() {
   const [loading, setLoading] = useState(true);
 
   const completarMision = async () => {
-    // console.log(user);
-    await actualizarExpYNivel(user?.uid, 10);
-  }
+    if (!user || !user.uid) return; // Salir si no hay usuario
+
+    await actualizarExpYNivel(user.uid, 10);
+  };
 
   useEffect(() => {
     const cargarMisiones = async () => {
