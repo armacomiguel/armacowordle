@@ -3,7 +3,6 @@
 import MisionesInvitado from "@/components/MisionesInvitado";
 import GameInvitado from "@/components/GameInvitado";
 import { useState } from "react";
-import HeaderInvitado from "@/components/HeaderInvitado";
 
 export default function Home() {
 
