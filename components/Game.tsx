@@ -15,6 +15,7 @@ import { actualizarProgresoMisionUsuario, obtenerMisionesConProgreso } from "@/l
 import { Mision } from "@/types/Mision";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { guardarProgresoLocal } from "@/lib/utils/localStorage";
 
 interface usuarioProps {
   username: string;
@@ -71,6 +72,9 @@ export default function Game() {
 
   const acerto = palabraIngresada === palabra;
 
+   // 🧠 GUARDAR EN LOCAL
+  guardarProgresoLocal(getFechaHoy(), palabra, nuevosIntentos, acerto);
+
   if (user) {
     const letrasEscritas = palabraIngresada.length;
     const evento: "letra" | "palabra" = acerto ? "palabra" : "letra";
@@ -90,7 +94,6 @@ export default function Game() {
 
       await actualizarStatsUsuario(user.uid, acerto);
 
-      console.log("acerto: ", acerto);
       if (acerto) {
         await guardarEnRanking({
           uid: user.uid,
@@ -126,24 +129,43 @@ export default function Game() {
 
   // Verifica si el usuario ya jugó hoy
   useEffect(() => {
-    const verificarProgreso = async () => {
-      if (!user) return;
+  const verificarProgreso = async () => {
+    if (!user) return;
 
-      const progreso = await obtenerProgresoHoy(user.uid);
+    // Paso 1: Revisar Firestore
+    const progreso = await obtenerProgresoHoy(user.uid);
+    if (progreso) {
+      setIntentos(progreso.intentos || []);
+      setJuegoTerminado(true);
+      setAcerto(progreso.acerto || false);
+      setMostrarResumen(true);
 
-      if (progreso) {
-        setIntentos(progreso.intentos || []);
-        setJuegoTerminado(true);
-        setAcerto(progreso.acerto || false);
-        setMostrarResumen(true);
+      // Limpia localStorage porque ya existe en Firestore
+      localStorage.removeItem('progresoWordle');
+    } else {
+      // Paso 2: Revisar localStorage si no hay en Firestore
+      const progresoLocal = localStorage.getItem('progresoWordle');
+      
+      if (progresoLocal) {
+        try {
+          const { dia, intentos: intentosLocales } = JSON.parse(progresoLocal);
+          const hoy = new Date().toISOString().split('T')[0];
+          if (dia === hoy && Array.isArray(intentosLocales)) {
+            setIntentos(intentosLocales);
+          }
+        } catch (err) {
+          console.error('Progreso local corrupto:', err);
+        }
       }
-      setProgresoCargado(true);
+    }
 
-      fetchUsuario();
-    };
+    setProgresoCargado(true);
+    fetchUsuario();
+  };
 
-    verificarProgreso();
-  }, [user]);
+  verificarProgreso();
+}, [user]);
+
 
  useEffect(() => {
   const handleKeyDown = (e: KeyboardEvent) => {

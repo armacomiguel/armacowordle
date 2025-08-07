@@ -11,6 +11,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { actualizarExpYNivel } from "@/lib/firebase/usuario";
+import { eliminarMision, obtenerMisionesConProgreso } from "@/lib/firebase/misiones";
 
 interface MisionGlobal {
   id: string;
@@ -32,9 +33,13 @@ export default function Misiones() {
   >([]);
   const [loading, setLoading] = useState(true);
 
-  const completarMision = async () => {
+  const completarMision = async (misionId: string) => {
     if (!user || !user.uid) return; // Salir si no hay usuario
-
+    console.log("misionId: ", misionId);
+    await eliminarMision(misionId);
+    const misiones = await obtenerMisionesConProgreso(user.uid);
+    setMisiones(misiones);
+    setLoading(false);
     await actualizarExpYNivel(user.uid, 10);
   };
 
@@ -94,48 +99,59 @@ export default function Misiones() {
   if (loading) return <p className="text-center">Cargando misiones...</p>;
 
   return (
-    <div className="max-w-md mx-auto p-4">
-      <h2 className="text-xl font-bold mb-4 text-center">Tus Misiones</h2>
-      <div className="space-y-4">
-        {misiones.map((mision) => {
-          const porcentaje = Math.min(
-            (mision.progreso / mision.requerido) * 100,
-            100
-          );
+   <div className="max-w-md mx-auto p-4">
+  <h2 className="text-xl font-bold mb-4 text-center">Tus Misiones</h2>
 
-          return (
-            <div
-              key={mision.id}
-              className="p-3 rounded-lg border bg-gray-50 dark:bg-[#27272a]">
-              <div className="flex justify-between mb-1">
-                <h3 className="font-medium">{mision.nombre}</h3>
-                {mision.completada ? (
-                  <span className="text-green-500 text-sm">Completada</span>
-                ) : (
-                  <span className="text-yellow-500 text-sm">
-                    {mision.progreso}/{mision.requerido}
-                  </span>
-                )}
-              </div>
-              <p className="text-sm text-gray-500 mb-2">
-                {mision.descripcion}
-              </p>
-              <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded">
-                <div
-                  className="h-full bg-[#12acff] rounded"
-                  style={{ width: `${porcentaje}%` }}
-                />
-              </div>
-              {mision.completada && (
-                <div className="">
-                  <button onClick={() => completarMision()} 
-                  className="w-full mt-2 bg-blue-400 text-white dark:bg-green-500 rounded-[8px] text-center p-1 font-bold dark:text-green-800">Obtener</button>
-                </div>
+  {misiones.length === 0 ? (
+    <p className="text-center text-gray-500">No tienes misiones disponibles por ahora.</p>
+  ) : (
+    <div className="space-y-4">
+      {misiones.map((mision) => {
+        const porcentaje = Math.min(
+          (mision.progreso / mision.requerido) * 100,
+          100
+        );
+
+        return (
+          <div
+            key={mision.id}
+            className="p-3 rounded-lg border bg-gray-50 dark:bg-[#27272a]"
+          >
+            <div className="flex justify-between mb-1">
+              <h3 className="font-medium">{mision.nombre}</h3>
+              {mision.completada ? (
+                <span className="text-green-500 text-sm">Completada</span>
+              ) : (
+                <span className="text-yellow-500 text-sm">
+                  {mision.progreso}/{mision.requerido}
+                </span>
               )}
             </div>
-          );
-        })}
-      </div>
+            <p className="text-sm text-gray-500 mb-2">
+              {mision.descripcion}
+            </p>
+            <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded">
+              <div
+                className="h-full bg-[#12acff] rounded"
+                style={{ width: `${porcentaje}%` }}
+              />
+            </div>
+            {mision.completada && (
+              <div>
+                <button
+                  onClick={() => completarMision(mision.id)}
+                  className="w-full mt-2 bg-blue-400 text-white dark:bg-green-500 rounded-[8px] text-center p-1 font-bold dark:text-green-800 cursor-pointer"
+                >
+                  completar
+                </button>
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
+  )}
+</div>
+
   );
 }

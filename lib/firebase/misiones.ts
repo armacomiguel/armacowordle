@@ -1,6 +1,6 @@
 import { db } from "@/lib/firebase";
 import { Mision } from "@/types/Mision";
-import { doc, getDoc, setDoc, updateDoc, serverTimestamp, collection, getDocs } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc, serverTimestamp, collection, getDocs, deleteDoc } from "firebase/firestore";
 
 export async function inicializarMisiones(uid: string) {
   const misiones = [
@@ -56,7 +56,6 @@ export async function actualizarMision(uid: string, misionId: string, incremento
   }
 }
 
-
 export async function actualizarProgresoMisionUsuario(uid: string, misionId: string, incremento = 1) {
   const refGlobal = doc(db, "misiones", misionId);
   const refUsuario = doc(db, "usuarios", uid, "misiones", misionId);
@@ -103,7 +102,6 @@ interface MisionUsuario {
   progreso: number;
   completada: boolean;
 }
-
 
 export async function obtenerMisionesConProgreso(uid: string): Promise<Mision[]> {
   const misionesGlobalRef = collection(db, "misiones");
@@ -162,4 +160,57 @@ export async function obtenerMisionesConProgreso(uid: string): Promise<Mision[]>
 
   return misiones;
 }
+
+export async function eliminarMision(id: string) {
+  await deleteDoc(doc(db, "misiones", id));
+};
+
+// export async function cargarMisiones(): Promise<Mision[]>{
+//       // if (!user) return;
+
+//   const misionesGlobales: Mision[] = [];
+//   const snapGlobal = await getDocs(collection(db, "misiones"));
+
+//   snapGlobal.forEach((doc) => {
+//     const data = doc.data();
+//     misionesGlobales.push({
+//       id: doc.id,
+//       nombre: data.nombre,
+//       descripcion: data.descripcion,
+//       tipo: data.tipo,
+//       requerido: data.requerido,
+//     });
+//   });
+
+//   const resultadosConProgreso = await Promise.all(
+//     misionesGlobales.map(async (mision) => {
+//       const refUsuario = doc(
+//         db,
+//         "usuarios",
+//         user.uid,
+//         "misiones",
+//         mision.id
+//       );
+//       const snapUsuario = await getDoc(refUsuario);
+
+//       if (!snapUsuario.exists()) {
+//         await setDoc(refUsuario, {
+//           progreso: 0,
+//           completada: false,
+//         });
+//         return { ...mision, progreso: 0, completada: false };
+//       } else {
+//         const data = snapUsuario.data() as MisionUsuario;
+//         return {
+//           ...mision,
+//           progreso: data.progreso ?? 0,
+//           completada: data.completada ?? false,
+//         };
+//       }
+//     })
+//   );
+
+//   // setMisiones(resultadosConProgreso);
+//   // setLoading(false);
+// };
 

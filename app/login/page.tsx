@@ -36,7 +36,7 @@ export default function LoginPage() {
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen text-center px-4">
-      <h1 className="text-3xl font-bold mb-4">Bienvenido al juego _Nombre_Por_Definir_</h1>
+      <h1 className="text-3xl font-bold mb-4">Bienvenido al juego Adivina el personaje</h1>
       <p className="mb-6 text-gray-500 dark:text-gray-400">
         Inicia sesión para comenzar a jugar
       </p>
